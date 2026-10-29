@@ -11,4 +11,3 @@ def load_data(name, sample_n=None, random_state=42):
     df.info()
     return df
 
-tips = load_data('tips')
