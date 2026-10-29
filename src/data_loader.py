@@ -11,3 +11,6 @@ def load_data(name, sample_n=None, random_state=42):
     df.info()
     return df
 
+
+if __name__ == "__main__":
+    load_data("tips")
