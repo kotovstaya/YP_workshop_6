@@ -3,7 +3,7 @@ import seaborn as sns
 
 
 def plot_histograms(df, cols, figsize=(14, 5)):
-    fig, axes = plt.subplots(1, 2, figsize=figsize)
+    fig, axes = plt.subplots(1, len(cols), figsize=figsize)
 
     if len(cols) == 1:
         axes = [axes]
@@ -12,7 +12,7 @@ def plot_histograms(df, cols, figsize=(14, 5)):
         sns.histplot(df[col], bins=30, kde=True, ax=ax, color="steelblue")
         mean_val = df[col].mean()
         med_val = df[col].median()
-        axes[0].set_title(f"{col} (mean={mean_val:.1f}, median={med_val:.1f})")
+        ax.set_title(f"{col} (mean={mean_val:.1f}, median={med_val:.1f})")
 
     plt.tight_layout()
     plt.show()
