@@ -16,9 +16,11 @@ def analyze_missing(tips):
     print('\n=== Категориальные столбцы ===')
     print(tips.describe(include=['object', 'category']))
 
+def handle_missing(tips):   
     print(f'Всего пропусков: {tips.isnull().sum().sum()}')
     print('Обработка не требуется')
 
+def compute_correlations(tips, [('total_bill','tip'), ('total_bill','size'), ('size','tip')]):   
     tips['tip_pct'] = tips['tip'] / tips['total_bill'] * 100
 
     pairs = [('total_bill', 'tip'), ('total_bill', 'size'), ('size', 'tip')]
@@ -28,7 +30,8 @@ def analyze_missing(tips):
         s_corr, _ = spearmanr(tips[c1], tips[c2])
         print(f'{c1} vs {c2}:  Пирсон r={p_corr:.3f}  Спирмен p={s_corr:.3f}')
 
-        print('Средние по дню и времени:')
+def print(groupby_stats(tips, ['day','time'], ['tip','tip_pct'])):
+    print('Средние по дню и времени:')
     print(tips.groupby(['day', 'time'])[['tip', 'tip_pct']].mean().round(2))
     print('\nСредние по полу:')
     print(tips.groupby('sex')[['total_bill', 'tip', 'tip_pct']].mean().round(2))
