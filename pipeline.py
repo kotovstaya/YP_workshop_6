@@ -1,16 +1,17 @@
 from src.data_loader import load_data
-from src.analysis import analyze_missing, handle_missing, compute_correlations
-from src.charts import groupby_stats, plot_histograms, plot_boxplots, plot_bars,  plot_heatmap, plot_scatter
+from src.analysis import analyze_missing, handle_missing, compute_correlations, groupby_stats
+from src.charts import plot_histograms, plot_boxplots, plot_bars,  plot_heatmap, plot_scatter
+
 
 def run_eda(name):
-    data = load_data(name)
-    print(data)
+    tips = load_data(name)
+    print(tips)
 
     analyze_missing(tips)
 
     handle_missing(tips)
 
-    compute_correlations(tips, [('total_bill', 'tip'), ('total_bill', 'size'), ('size', 'tip')])
+    compute_correlations(tips)
 
     print(groupby_stats(tips, ['day', 'time'], ['tip', 'tip_pct']))
 
@@ -24,3 +25,6 @@ def run_eda(name):
 
     plot_scatter(tips, 'total_bill', 'tip', 'smoker')
     plot_scatter(tips, 'total_bill', 'tip', 'time')
+
+if __name__ == "__main__":
+    run_eda("tips")
